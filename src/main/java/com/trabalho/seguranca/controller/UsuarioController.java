@@ -28,11 +28,20 @@ public class UsuarioController {
             return ResponseEntity.status(400).body(false);
         }
     }
-
     @GetMapping
     public ResponseEntity<List<Usuario>> getUsuarios() {
         List<Usuario> usuarios = usuarioService.getUsuarios();
-        return ResponseEntity.status(200).body(usuarios);
+        return ResponseEntity.ok(usuarios);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Usuario> getUsuarioPorId(@PathVariable("id") Long id) {
+        Usuario usuario = usuarioService.getUsuarioPorId(id);  // crie este método no service
+        if (usuario != null) {
+            return ResponseEntity.ok(usuario);
+        } else {
+            return ResponseEntity.status(404).body(null);
+        }
     }
 
     @DeleteMapping("/{id}")
