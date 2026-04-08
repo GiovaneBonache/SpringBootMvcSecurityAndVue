@@ -3,6 +3,8 @@ package com.trabalho.seguranca.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+
 import java.util.List;
 
 @Entity(name = "usuarios")
@@ -10,8 +12,12 @@ public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id_usuario;
+    @NotBlank(message = "Nome não pode ser vazio")
     private String nome;
+    @NotBlank(message = "Sobrenome não pode ser vazio")
     private String sobrenome;
+
+    @NotBlank(message = "Email não pode ser vazio")
     @Column(unique = true)
     private String email;
 
@@ -23,7 +29,7 @@ public class Usuario {
         this.senha = senha;
     }
 
-    
+    @NotBlank(message = "Senha não pode ser vazia")
     private String senha;
 
     @ManyToMany(fetch = FetchType.EAGER)

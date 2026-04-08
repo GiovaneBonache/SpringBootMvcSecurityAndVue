@@ -2,6 +2,7 @@ package com.trabalho.seguranca.controller;
 
 import com.trabalho.seguranca.model.entity.Usuario;
 import com.trabalho.seguranca.model.service.UsuarioService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +16,7 @@ public class UsuarioController {
     private UsuarioService usuarioService;
 
     @PostMapping("/novo")
-    public ResponseEntity<?> criarUsuario(@RequestBody Usuario usuario) {
+    public ResponseEntity<?> criarUsuario(@Valid @RequestBody Usuario usuario) {
         Boolean criou = false;
         try {
             criou = usuarioService.criarUsuario(usuario);
