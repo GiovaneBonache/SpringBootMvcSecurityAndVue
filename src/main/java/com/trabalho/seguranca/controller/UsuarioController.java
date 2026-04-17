@@ -37,7 +37,7 @@ public class UsuarioController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Usuario> getUsuarioPorId(@PathVariable("id") Long id) {
-        Usuario usuario = usuarioService.getUsuarioPorId(id);  // crie este método no service
+        Usuario usuario = usuarioService.getUsuarioPorId(id);
         if (usuario != null) {
             return ResponseEntity.ok(usuario);
         } else {
@@ -55,7 +55,16 @@ public class UsuarioController {
             return ResponseEntity.status(404).body(false);
         }
     }
+    @PutMapping("/{id}")
+    public ResponseEntity<Usuario> atualizarUsuario(@PathVariable Long id, @RequestBody Usuario usuario) {
+        Usuario atualizado = usuarioService.atualizarUsuario(id, usuario);
 
+        if (atualizado != null) {
+            return ResponseEntity.ok(atualizado);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 
 
 }

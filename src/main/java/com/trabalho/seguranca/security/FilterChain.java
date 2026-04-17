@@ -45,12 +45,12 @@ public class FilterChain {
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorization ->{
+                    authorization.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll();
                     authorization.requestMatchers(HttpMethod.POST, "/login").permitAll();
                     authorization.requestMatchers(HttpMethod.POST, "/usuarios/novo").permitAll();
                     authorization.requestMatchers(HttpMethod.GET, "/usuarios") .hasAnyRole("USER", "ADMIN");
                     authorization.requestMatchers(HttpMethod.DELETE, "/usuarios/**").hasRole("ADMIN");
                     authorization.requestMatchers(HttpMethod.PUT, "/usuarios/**").hasRole("ADMIN");
-                    authorization.requestMatchers("/chamados/**").authenticated();
                     authorization.anyRequest().authenticated();
                         }
                 )

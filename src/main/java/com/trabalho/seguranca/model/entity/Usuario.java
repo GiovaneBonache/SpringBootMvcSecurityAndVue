@@ -40,10 +40,6 @@ public class Usuario {
     )
     private List<Papel> papeis;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
-    private List<Chamado> chamados;
-
     public Usuario() {}
 
     public Usuario(Long id_usuario, String nome, String email, String sobrenome,List<Papel> papeis) {

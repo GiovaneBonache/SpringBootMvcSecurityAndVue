@@ -53,6 +53,23 @@ public class UsuarioService {
             return false;
         }
     }
+    public Usuario atualizarUsuario(Long id, Usuario usuarioAtualizado) {
+        Usuario usuario = usuarioRepository.findById(id).orElse(null);
+
+        if (usuario == null) {
+            return null;
+        }
+
+        usuario.setNome(usuarioAtualizado.getNome());
+        usuario.setSobrenome(usuarioAtualizado.getSobrenome());
+        usuario.setEmail(usuarioAtualizado.getEmail());
+
+        if (usuarioAtualizado.getSenha() != null && !usuarioAtualizado.getSenha().isEmpty()) {
+            usuario.setSenha(passwordEncoder.encode(usuarioAtualizado.getSenha()));
+        }
+
+        return usuarioRepository.save(usuario);
+    }
 
     public Usuario buscarPorEmail(String email) {
         return usuarioRepository.findByEmail(email);
